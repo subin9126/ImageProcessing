@@ -1,0 +1,10 @@
+#!/bin/bash
+
+FS_GTMSEG_RESULTS_DIR='/DATA/IMAGE_DAY/FS/2_fsresults_gtmseg'
+UPLOAD_SERVER_DIR='/media/fsdb1_mnt/fs_snubh/2_FSRESULTS_V6_ALL'
+
+cd $FS_GTMSEG_RESULTS_DIR
+
+cp -R * $UPLOAD_SERVER_DIR
+
+

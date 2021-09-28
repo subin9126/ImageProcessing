@@ -1,0 +1,46 @@
+#!/bin/bash
+####################################################################################
+# Explanation:
+# * This code runs FreeSurfer v6 cortical parcellation on specified isovoxel T1 .nii images
+#
+# Change these variables accordingly:
+# * FREESURFER_HOME is where the freesurfer is installed in the computer.
+# * INPUT_FOLDER is the folder where the isovoxel .nii files are (same as OUTPUT_FOLDER from previous code)
+# * OUTPUT_FOLDER is the folder where FreeSurfer results will be saved.
+# * SUBJECT_FOLDERS is collection of subjects to run. 
+#   Enter each subject as folder form (hospitalnumber_MRIdate) in the brackets.   
+
+export FREESURFER_HOME=/usr/local/freesurfer_6/freesurfer
+INPUT_FOLDER=/DATA/IMAGE_DAY/FS/1_T1_isonii
+OUTPUT_FOLDER=/DATA/IMAGE_DAY/FS/2_fsresults_gtmseg
+SUBJECT_FOLDERS=( )
+
+
+###################################################################################
+
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+
+SUBJECTS_DIR=$OUTPUT_FOLDER
+
+# 1. Run recon-all
+for idx in ${!SUBJECT_FOLDERS[*]}
+
+	do 
+	subj=${SUBJECT_FOLDERS[$idx]}
+
+	cd $INPUT_FOLDER
+	
+	recon-all -i "r"$subj"_T1".nii -subject "r"$subj -all -parallel -openmp 6
+
+done
+
+# 2. Run gtmseg (for PET-matched subects only)
+for idx in ${!SUBJECT_FOLDERS[*]}
+
+	do 
+	subj=${SUBJECT_FOLDERS[$idx]}
+
+	gtmseg --s "r"$subj --o gtmseg.mgz
+
+done
+

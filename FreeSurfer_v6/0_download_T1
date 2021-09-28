@@ -1,0 +1,27 @@
+#!/bin/bash
+
+SERVER_DIR='/media/imgdb_mnt/0_MRI'
+DOWNLOAD_DIR='/DATA/IMAGE_DAY/FS/0_t1_hdrimg'
+
+SUBJECT_FOLDERS=( )
+
+##########################################################################
+
+# 1. Download T1 images from server
+for idx in ${!SUBJECT_FOLDERS[*]} 
+
+	do
+subj=${SUBJECT_FOLDERS[$idx]}
+
+	cd $SERVER_DIR/*/$subj
+	
+	cp $subj*"T1"*.hdr $DOWNLOAD_DIR
+	cp $subj*"T1"*.img $DOWNLOAD_DIR
+
+done
+
+
+# 2. Delete 'GD' T1 images
+cd $DOWNLOAD_DIR
+rm *"GD"* 
+

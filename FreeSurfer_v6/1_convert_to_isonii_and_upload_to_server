@@ -1,0 +1,31 @@
+#!/bin/bash
+export FREESURFER_HOME=/usr/local/freesurfer_6/freesurfer
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+
+INPUT_DIR='/DATA/IMAGE_DAY/FS/0_t1_hdrimg'
+OUTPUT_DIR='/DATA/IMAGE_DAY/FS/1_t1_isonii'
+UPLOAD_SERVER_DIR='/media/fsdb1_mnt/fs_snubh/1_T1_isonii'
+
+SUBJECT_FOLDERS=( )
+
+##########################################################################
+# 1. Convert to iso nii
+cd $INPUT_DIR
+for idx in ${!SUBJECT_FOLDERS[*]} 
+
+
+	do
+	subj=${SUBJECT_FOLDERS[$idx]}
+
+	mri_convert -i $subj*.hdr -it nifti1 -vs 1 1 1 -ot nii -o $OUTPUT_DIR/"r"$subj"_T1".nii
+
+
+done
+
+
+# 2. Upload to server
+
+
+cd $OUTPUT_DIR
+
+cp "r"$subj"_T1".nii $UPLOAD_SERVER_DIR

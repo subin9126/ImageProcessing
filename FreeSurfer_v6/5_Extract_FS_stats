@@ -1,0 +1,24 @@
+#!/bin/bash
+export FREESURFER_HOME=/usr/local/freesurfer_6/freesurfer
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+
+FSRESULTS_ALL_DIR=/media/fsdb1_mnt/fs_snubh/2_FSRESULTS_V6_ALL
+OUTPUT_STATS_DIR=/media/fsdb1_mnt/fs_snubh/5_FS_STATS
+
+version="_210215"
+
+#########################################################################################################
+SUBJECTS_DIR=$FSRESULTS_ALL_DIR
+cd $SUBJECTS_DIR
+
+subj=$(ls)
+
+asegstats2table --subjects $subj --tablefile $OUTPUT_STATS_DIR/"asegstats"$version.csv --skip
+
+aparcstats2table --hemi lh --subjects $subj --meas volume --tablefile $OUTPUT_STATS_DIR/"aparcstats_lh_volume"$version.csv --skip
+aparcstats2table --hemi rh --subjects $subj --meas volume --tablefile $OUTPUT_STATS_DIR/"aparcstats_rh_volume"$version.csv --skip
+
+aparcstats2table --hemi lh --subjects $subj --meas thickness --tablefile $OUTPUT_STATS_DIR/"aparcstats_lh_thick"$version.csv --skip
+aparcstats2table --hemi rh --subjects $subj --meas thickness --tablefile $OUTPUT_STATS_DIR/"aparcstats_rh_thick"$version.csv --skip
+
+
