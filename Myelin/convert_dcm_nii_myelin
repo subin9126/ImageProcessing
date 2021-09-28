@@ -1,0 +1,34 @@
+#!/bin/bash
+#######################################################################################
+# 0. Copies dcm files from subject/DICOM folder in RedSlim to 0_MYELIN_DICOM/subject,
+# 1. Calls the dcm2nii_multi_nonCDnum matlab script to convert
+# * Reference links: https://www.mathworks.com/matlabcentral/answers/16353-run-function-with-input-variable-from-linux-terminal
+#             	     https://stackoverflow.com/questions/38723138/matlab-execute-script-from-command-linux-line
+# * -nodesktop and -nodisplay: To run it without GUI
+# * -nosplash: 
+# * -nojvm: Highly recommended, to prevent it from running without java virtual machine (keep RAM consumption low)
+# * |tail -n +14: To skip the first 14 lines that are output by matlab's welcome message 
+#
+# TEMPLATE FORM: matlab -nodesktop -nosplash -r "cd('your directory');function_name('your string');exit"
+#
+# NOTE. After script is done running, will be in matlab terminal mode and what i type will be invisible. But simply type exit afterwards.
+########################################################################################
+
+SRCFOLDER=/media/imgdb_mnt/Personal/SUBIN/myelin #<-CHANGE DATE
+DESTFOLDER=/media/ws1/DATA/0_MYELIN_DICOM/210119_PICKUP #<-CHANGE DATE
+#mkdir $DESTFOLDER
+
+# 0.
+for subj in 10085022_201202 10192502_201030 10196698_201026 10323375_200921 10339248_200716 10354805_200922 10501214_201006 10603855_210114 10645556_201022 10659562_201124 10805536_201008 10825251_201231 11110635_201016 11171351_201208 11637868_201027 12328763_201210 13743062_200820 15344656_200810 16591587_200914 17356547_201028 21972094_210112 22203087_201217 22691103_200819 26970930_201113 27774995_201207 27791077_210104 31687230_201116 31840543_200902 32231205_201029 32350803_201030 32861233_200826 32930108_200825 32939198_200828 33036768_200925 33081984_201014 33612225_210114 #11053725_210106 12506361_201021 33303800_201116 33323936_201229
+	do
+	mkdir $DESTFOLDER/$subj
+	cp -R $SRCFOLDER/$subj/DICOM/* $DESTFOLDER/$subj
+done
+
+# 1.
+matlab -nodesktop -nosplash -nojvm -r "cd('/home/ws1/matlab/SUBIN/dcm2nii_linux');dcm2nii_multi_nonCD('/media/ws1/DATA/0_MYELIN_DICOM/210119_PICKUP');exit" |tail -n +14   #<-CHANGE DATE
+
+
+
+
+
