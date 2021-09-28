@@ -1,0 +1,19 @@
+#!/bin/bash
+
+SERVER_DIR=/media/imgdb_mnt/0_MRI
+DOWNLOAD_DIR=/media/ws2/DATA/IMAGE_DAY/WMH/0_flair
+
+SUBJECTS=(32136348_191216 32230411_200407) 
+
+#############################################################
+
+for idx in ${!SUBJECTS[*]}
+
+	do
+	subj=${SUBJECTS[$idx]}
+	
+	cd $SERVER_DIR/*/$subj
+	cp $subj*"FLAIR"*.hdr $DOWNLOAD_DIR
+	cp $subj*"FLAIR"*.img $DOWNLOAD_DIR
+
+done

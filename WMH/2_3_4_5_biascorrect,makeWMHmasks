@@ -1,0 +1,12 @@
+#!/bin/bash
+# Change accordingly.
+# 0 to deactivate, 1 to activate.
+DO_BIAS_CORRECTION=0;
+DO_WMH_SEGMENT=1;
+DO_CLEAN_WMH=1;
+DO_PVD_WMHMASK=1;
+DO_JVPVD_WMHMASK=1;
+
+####################################################################################
+matlab -r "cd('/media/ws2/DATA/IMAGE_DAY/WMH/SCRIPTS'); WMH_Analysis_Pipeline($DO_BIAS_CORRECTION, $DO_WMH_SEGMENT, $DO_CLEAN_WMH, $DO_PVD_WMHMASK, $DO_JVPVD_WMHMASK)"
+

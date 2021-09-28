@@ -1,0 +1,23 @@
+#!/bin/bash
+
+SERVER_DIR_MASK=/media/fsdb1_mnt/fs_snubh/5_FS_MASKS/WMPARC
+SERVER_DIR_ISOT1=/media/fsdb1_mnt/fs_snubh/1_T1_isonii
+DOWNLOAD_DIR_MASK=/media/ws2/DATA/IMAGE_DAY/WMH/3_fsmasks
+DOWNLOAD_DIR_ISOT1=/media/ws2/DATA/IMAGE_DAY/WMH/3_isot1
+
+SUBJECTS=(32136348_191216 32230411_200407)
+
+#############################################################
+
+for idx in ${!SUBJECTS[*]}
+
+	do
+	subj=${SUBJECTS[$idx]}
+
+	cd $SERVER_DIR_ISOT1
+	cp "r"$subj"_T1".nii $DOWNLOAD_DIR_ISOT1
+
+	cd $SERVER_DIR_MASK
+	cp "r"$subj"_wmparc".nii $DOWNLOAD_DIR_MASK
+
+done

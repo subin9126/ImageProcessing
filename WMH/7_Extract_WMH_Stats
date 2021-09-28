@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+matlab -r "cd('/media/ws2/DATA/IMAGE_DAY/WMH/SCRIPTS'); Calculate_WMHStats_Pipeline"

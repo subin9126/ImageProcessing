@@ -1,0 +1,43 @@
+#!/bin/bash
+
+SUBJECTS_TO_UPLOAD=(32230411_200407)
+
+#####################################################################
+SERVER_DIR_BCFLAIR=/media/wmhdb_mnt/1_BCFLAIR
+SERVER_DIR_ORIG_WMH=/media/wmhdb_mnt/2_ORIG_WMH
+SERVER_DIR_CLEAN_WMH=/media/wmhdb_mnt/3_CLEAN_WMH
+SERVER_DIR_PVD_WMH=/media/wmhdb_mnt/4A_PVD_WMH
+SERVER_DIR_JVPVD_WMH=/media/wmhdb_mnt/4B_JVPVD_WMH
+SERVER_DIR_99_FLAIRREG_FSMASKS=/media/wmhdb_mnt/99_SIDEPRODUCTS/flairreg_FSMASKS
+SERVER_DIR_99_FLAIRREG_T1=/media/wmhdb_mnt/99_SIDEPRODUCTS/flairreg_T1
+SERVER_DIR_99_FLAIRREG_VENT=/media/wmhdb_mnt/99_SIDEPRODUCTS/flairreg_VENTRICLE_MASKS
+SERVER_DIR_99_NOCTX_FSMASKS=/media/wmhdb_mnt/99_SIDEPRODUCTS/noctx_FSMASKS
+
+src_dir_bcflair=/media/ws2/DATA/IMAGE_DAY/WMH/1_bcflair
+src_dir_orig_wmh=/media/ws2/DATA/IMAGE_DAY/WMH/2_orig_wmh
+src_dir_clean_wmh=/media/ws2/DATA/IMAGE_DAY/WMH/3_clean_wmh
+src_dir_pvd_wmh=/media/ws2/DATA/IMAGE_DAY/WMH/4a_pvd_wmh
+src_dir_jvpvd_wmh=/media/ws2/DATA/IMAGE_DAY/WMH/4b_jvpvd_wmh
+src_dir_99_flairreg_fsmasks=/media/ws2/DATA/IMAGE_DAY/WMH/99_sideproducts/flairreg_fsmasks
+src_dir_99_flairreg_t1=/media/ws2/DATA/IMAGE_DAY/WMH/99_sideproducts/flairreg_t1
+src_dir_99_flairreg_vent=/media/ws2/DATA/IMAGE_DAY/WMH/99_sideproducts/flairreg_ventricle_masks
+src_dir_99_noctx_fsmasks=/media/ws2/DATA/IMAGE_DAY/WMH/99_sideproducts/noctx_fsmasks
+
+for idx in ${!SUBJECTS_TO_UPLOAD[*]}
+
+
+	do
+	subj=${SUBJECTS_TO_UPLOAD[$idx]}
+	
+	cp $src_dir_bcflair/*$subj* $SERVER_DIR_BCFLAIR
+	cp $src_dir_orig_wmh/*$subj* $SERVER_DIR_ORIG_WMH
+	cp $src_dir_clean_wmh/*$subj* $SERVER_DIR_CLEAN_WMH
+	cp $src_dir_pvd_wmh/*$subj* $SERVER_DIR_PVD_WMH
+	cp $src_dir_jvpvd_wmh/*$subj* $SERVER_DIR_JVPVD_WMH
+	cp $src_dir_99_flairreg_fsmasks/*$subj* $SERVER_DIR_99_FLAIRREG_FSMASKS
+	cp $src_dir_99_flairreg_t1/*$subj* $SERVER_DIR_99_FLAIRREG_T1
+	cp $src_dir_99_flairreg_vent/*$subj* $SERVER_DIR_99_FLAIRREG_VENT
+	cp $src_dir_99_noctx_fsmasks/*$subj* $SERVER_DIR_99_NOCTX_FSMASKS
+
+done
+
