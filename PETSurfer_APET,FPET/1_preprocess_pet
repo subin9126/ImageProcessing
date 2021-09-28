@@ -1,0 +1,44 @@
+#!/bin/bash
+##################################################################################################
+# * This code does the following preprocessing steps for pet images:
+#   1. Renames pet .hdr/img files to simpler name
+#      (ex).'_Neuraceq+Reframe'-->'_apet'  (ex).'_3D_Brain'-->'_fpet')  
+#   2. Converts renamed .hdr/img files to .nii 
+#      We are using spm's function instead of FreeSurfer's mri_convert because 
+#      mri_convert results in bad magic number errors).
+#   3. Left-right flips the .nii files
+#      Using spm's function results in having to left-right flip for good mri-coregistration later  
+#
+# * mscriptdir is where the 'Preprocess_PETimages_workflow.m' is located
+# * tmp_dir is where the .hdr/img pet files are temporarily downloaded from Server for processing
+# * nii_dir is where the .nii outputs will be created
+# * flip_nii_dir is where the flipped .nii outputs will be created
+# * pettype labels whether current pet files are amyloid pet or fdg pet
+# * SUBJECTS is the collection of subjects to be run
+
+mscriptdir=/DATA/IMAGE_DAY/PET/SCRIPTS
+tmp_dir=/DATA/IMAGE_DAY/PET/0_pet_hdrimg
+rename_hdrimg_dir=/DATA/IMAGE_DAY/PET/1_1_pet_hdrimg_renamed
+nii_dir=/DATA/IMAGE_DAY/PET/1_2_pet_nii
+flip_nii_dir=/DATA/IMAGE_DAY/PET/1_2_pet_nii_flip
+
+pettype="_apet" #<- "_apet" or "_fpet"
+SUBJECTS_PET=(10324020_171209 10324020_170121)
+##################################################################################################
+
+# 1. Rename files to simpler name:
+for idx in ${!SUBJECTS_PET[*]}
+	do
+	cd $tmp_dir
+	mv ${SUBJECTS_PET[$idx]}*.hdr $rename_hdrimg_dir/${SUBJECTS_PET[$idx]}$pettype.hdr
+	mv ${SUBJECTS_PET[$idx]}*.img $rename_hdrimg_dir/${SUBJECTS_PET[$idx]}$pettype.img	
+done
+
+# 2. Use matlab script to nii-transform and flip:
+matlab -nodesktop -nosplash -nojvm -r "cd('$mscriptdir');addpath('/home/user/Documents/spm8'); addpath('/home/user/Documents/NIfTI_20140122');  Preprocess_PETimages_workflow('$rename_hdrimg_dir', '$pettype', '$nii_dir', '$flip_nii_dir');exit" |tail -n +14
+
+
+
+
+
+

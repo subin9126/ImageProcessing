@@ -1,0 +1,32 @@
+#!/bin/bash
+##################################################################################################
+# Explanation:
+# * This code uploads the outputs from the current batch of subjects to Server.
+
+TMP_FSFOLDER_DIR=/media/DATA/2_FSRESULTS
+PET_FOLDER=/home/ws1/Desktop/IMAGEDB_DELL/1_2_flip_nii
+PARAM_FOLDER=/home/ws1/Desktop/IMAGEDB_DELL/2_mricoreg/param
+COREGPET_FOLDER=/home/ws1/Desktop/IMAGEDB_DELL/2_mricoreg/coreg_pet
+GTMPVC_FOLDER=/home/ws1/Desktop/IMAGEDB_DELL/3_gtmpvc
+
+SERVER_FSFOLDER_DIR=/media/recodesyno/
+SERVER_PET_FOLDER=/media/recodesyno/
+SERVER_PARAM_FOLDER=/media/recodesyno/
+SERVER_COREGPET_FOLDER=/media/recodesyno/
+SERVER_GTMPVC_FOLDER=/media/recodesyno/
+
+pettype="_apet" #<- "_apet" or "_fpet"
+SUBJECT_FOLDERS=(24013925_180529)
+##################################################################################################
+
+for idx in ${!SUBJECT_FOLDERS[*]}
+
+	do
+	subj="r"${SUBJECT_FOLDERS[$idx]}
+
+	cp $PET_FOLDER/*$subj*.nii $SERVER_PET_FOLDER
+	cp $PARAM_FOLDER/*$subj*.reg.lta $SERVER_PARAM_FOLDER
+	cp $COREGPET_FOLDER/*$subj*.nii $SERVER_COREGPET_FOLDER
+	cp $GTMPVC_FOLDER/*$subj*.output $SERVER_GTMPVC_FOLDER
+	cp $TMP_FSFOLDER_DIR/"r"$subj/mri/gtmseg.mgz $SERVER_FSFOLDER_DIR/"r"$subj/mri
+done

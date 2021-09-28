@@ -1,0 +1,16 @@
+#!/bin/bash
+# Run this code afer manually checking that there are no problems with the preprocesset PET files
+
+
+PETSERVER=/media/fsdb2_mnt/ps_snubh/Amyloid-PET
+
+rename_hdrimg_dir=/media/ws2/DATA/IMAGE_DAY/PET/1_1_pet_hdrimg_renamed
+nii_dir=/media/ws2/DATA/IMAGE_DAY/PET/1_2_pet_nii
+flip_nii_dir=/media/ws2/DATA/IMAGE_DAY/PET/1_3_pet_nii_flip
+
+
+cd $nii_dir
+cp * $PETSERVER/1_2_RENAMED_NII_PET
+
+cd $flip_nii_dir
+cp * $PETSERVER/1_3_FLIPPED_NII_PET

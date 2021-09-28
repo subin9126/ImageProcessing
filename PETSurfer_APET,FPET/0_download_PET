@@ -1,0 +1,25 @@
+#!/bin/bash
+##################################################################################################
+# Explanation:
+# * This code downloads the specified subjects' PET files from server to dell1:
+#   (Subjects who have MRIs)
+
+
+PET_SERVER_DIR=/media/imgdb_mnt/0_APET
+PET_DOWNLOAD_DIR=/DATA/IMAGE_DAY/PET/0_pet_hdrimg
+
+pet_name='_Neuraceq_ac+Reframe' #'_3D_Brain' for FDGPET, '_Neuraceq_ac+Reframe' for ABPET
+SUBJECTS_PET=(10324020_171209 10324020_170121)
+
+##################################################################################################
+
+for idx in ${!SUBJECTS_PET[*]}
+
+	do
+	subj=${SUBJECTS_PET[$idx]}
+
+	cd $PET_SERVER_DIR/*/$subj
+	cp $subj*$pet_name*.hdr $PET_DOWNLOAD_DIR
+	cp $subj*$pet_name*.img $PET_DOWNLOAD_DIR
+
+done

@@ -1,0 +1,37 @@
+#!/bin/bash
+# * This code uploads the outputs from the current batch of subjects to Server.
+
+rename_hdrimg_dir=/DATA/IMAGE_DAY/PET/1_1_pet_hdrimg_renamed
+nii_dir=/DATA/IMAGE_DAY/PET/1_2_pet_nii
+flip_nii_dir=/DATA/IMAGE_DAY/PET/1_2_pet_nii_flip
+gtmpvc_dir=/DATA/IMAGE_DAY/PET/3_gtmpvc
+
+PETSERVER=/media/fsdb2_mnt/ps_snubh/Amyloid-PET
+SERVER_RENAMED_NII_FOLDER=$PETSERVER/1_2_RENAMED_NII_PET
+SERVER_FLIP_NII_FOLDER=$PETSERVER/1_3_FLIPPED_NII_PET
+SERVER_PARAM_FOLDER=$PETSERVER/2_MRICOREG/PARAM
+SERVER_COREGPET_FOLDER=$PETSERVER/2_MRICOREG/COREG_PET
+SERVER_GTMPVC_FOLDER=$PETSERVER/3_GTMPVC
+
+pettype="_apet" #<- "_apet" or "_fpet"
+
+
+cp $nii_dir/*.nii $SERVER_RENAMED_NII_FOLDER
+
+cp $flip_nii_dir/*.nii $SERVER_FLIP_NII_FOLDER
+
+cp $param_dir/*.reg.lta $SERVER_PARAM_FOLDER
+cp $coregpet_dir/*.nii $SERVER_COREGPET_FOLDER
+
+cp -R $gtmpvc_dir/*.output $SERVER_GTMPVC_FOLDER
+
+
+
+
+
+
+
+
+
+
+
