@@ -9,12 +9,12 @@
 #   3. Left-right flips the .nii files
 #      Using spm's function results in having to left-right flip for good mri-coregistration later  
 #
-# * mscriptdir is where the 'Preprocess_PETimages_workflow.m' is located
-# * tmp_dir is where the .hdr/img pet files are temporarily downloaded from Server for processing
-# * nii_dir is where the .nii outputs will be created
-# * flip_nii_dir is where the flipped .nii outputs will be created
-# * pettype labels whether current pet files are amyloid pet or fdg pet
-# * SUBJECTS is the collection of subjects to be run
+# * mscriptdir - where the 'Preprocess_PETimages_workflow.m' is located
+# * tmp_dir    - where the .hdr/img pet files are temporarily downloaded from Server for processing
+# * nii_dir    - where the .nii outputs will be created
+# * flip_nii_dir - where the flipped .nii outputs will be created
+# * pettype  - labels whether current pet files are amyloid pet or fdg pet
+# * SUBJECTS - the collection of subjects to be run
 
 mscriptdir=/DATA/IMAGE_DAY/PET/SCRIPTS
 tmp_dir=/DATA/IMAGE_DAY/PET/0_pet_hdrimg
@@ -23,7 +23,8 @@ nii_dir=/DATA/IMAGE_DAY/PET/1_2_pet_nii
 flip_nii_dir=/DATA/IMAGE_DAY/PET/1_2_pet_nii_flip
 
 pettype="_apet" #<- "_apet" or "_fpet"
-SUBJECTS_PET=(10324020_171209 10324020_170121)
+SUBJECTS_PET=(10005259_200514 10009989_190227 )
+
 ##################################################################################################
 
 # 1. Rename files to simpler name:
