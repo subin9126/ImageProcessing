@@ -5,6 +5,7 @@
 % - Use this SUVR to determine amyloid-positive vs amyloid-negative subjects.
 %   - For AV45, threshold is 1.11
 %   - For FBB, threshold is 1.20
+% - SUVR are calculated by referencing to whole cerebellum.
 %
 % Input:
 % CSV files as defined in the 'Specify Accordinly' section. 
