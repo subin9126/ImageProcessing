@@ -1,16 +1,26 @@
-% Calculates Cortical Summary ROI SUVR as described by Landau in ADNI document.
+% About:
+% - Calculates Cortical Summary ROI SUVR as described by Landau in ADNI document.
 %   - 'Florbetapir processing methods'
 %   - 'Florbetaben processing and positivity threshold derivation'
-% Use this SUVR to determine amyloid-positive vs amyloid-negative subjects.
+% - Use this SUVR to determine amyloid-positive vs amyloid-negative subjects.
 %   - For AV45, threshold is 1.11
 %   - For FBB, threshold is 1.20
-% To index table-variables, code used {} bracket instead of the [] bracket.
+%
+% Input:
+% CSV files as defined in the 'Specify Accordinly' section. 
+%
+% Output:
+% FINAL - a nxm table where n is number of subjects and m columns are:
+%           - first column is subjectname
+%           - second column is Cortical Summary SUVR
+%           - third to last columns are SUVR of ROIs
 %
 % * NUMBER OF SUBJECTS IN GTMSTATS AND ASEG/APARCSTATS MUST BE SAME.
 % * ONLY RAW CSV FILES MUST BE INPUT.
 % * MUST BE FROM FREESURFER V.6.
 % * MAKE SURE SUBJECTS IN GTMSTATS AND ASEG/APARCSTATS ARE IN SAME ORDER***
 %   - to make sure, input gtmpvclist that is a csv file.
+
 
 
 clear 
