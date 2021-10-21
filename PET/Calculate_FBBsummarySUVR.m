@@ -48,8 +48,7 @@ idx_lattempsubroi_vol = [15 30];
 
 %------------------------------------------------------------------------------------------
 % 000 . 
-% Codified version of:
-% 'Import Data --> select csv file --> Table --> Import Selection'
+% Load files (codified version of 'Import Data --> select csv file --> Table --> Import Selection'):
 gtmpvclist = import_gtmpvclist_csv(filename_gtmpvclist);
 orig_gtmstats = import_gtmstats_csv(filename_gtmstats);
 
@@ -61,11 +60,8 @@ orig_aparc_rh = import_aparc_rh_csv(filename_aparc_rh);
 % Collect first columns (subject) of each table, for easy reference:
 Subjects_matrix = [gtmpvclist orig_aseg(:,1) orig_aparc_lh(:,1) orig_aparc_rh(:,1) ];
     
-%------------------------------------------------------------------------------------------
-% Calculate Cortical Summary SUVR and Amyloid Positivity
-    
 % 0.
-% Rearrange column order:
+% Rearrange column order by lobe:
 ref_gtmstats = orig_gtmstats(:, REF_columns_gtmpvc);
 roi_gtmstats = orig_gtmstats(:, ROI_columns_gtmpvc); 
                % 1: subject column / 2~19: lhrh_front / 20~27: lhrh_cing / 28~35: lhrh_latpariet / 36~39: lhrh_lattemp
@@ -84,13 +80,13 @@ if size(roi_gtmstats,1) ~= size(roi_aparc,1) ...
     error('Matrix size of roi_gtmstats and roi_aparc are different')
 end
              
-
+%------------------------------------------------------------------------------------------
+% Calculate Cortical Summary SUVR and Amyloid Positivity
 % 1. 
 % Calculate Reference Region's SUV:
 suv_ref = mean(ref_gtmstats{:, 2:end}, 2); 
                                 % returns ref suv for each subject 
-
-  
+ 
 % Section 2 does the following calculation for each of the 4 main cortical regions:
 % Formula for weighted average SUV of each main cortical region:
 %    ((subregion1_FBBmean x subregion1_volume) + (subregion2_FBBmean x subregion2_volume) + ... + (subregionN_FBBmean x subregionN_volume))
