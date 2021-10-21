@@ -14,6 +14,8 @@
 
 
 clear 
+
+% ++++++++++++++++++++Specify Accordingly+++++++++++++++++++++++++++++++++++++++++++++++++++++
 % Fill in path to specified files.
 % (should all be unedited .csv files! .xls files usually result in errors):
 filename_gtmpvclist = <path to .csv file version of gtmpvclist from '5_extract_PVCvalues'> 
@@ -22,9 +24,9 @@ filename_aseg = <path to .csv file asegstats2table output of '5_Extract_FS_stats
 filename_aparc_lh = <path to .csv file lh aparcstats2table output of '5_Extract_FS_stats'>
 filename_aparc_rh = <path to .csv file rh aparcstats2table output of '5_Extract_FS_stats'>
 
-%-------------------------------------------------------------------------------------------------------------------------------------------------------
-
-% ========================= ROI Column Dictionary =========================
+%++++++++++++++++++++Do Not Change Below++++++++++++++++++++++++++++++++++++++++++++++++++++
+%------------------------------------------------------------------------------------------
+% ROI Column Dictionary.
 % gtmpvc stats:
 idx_reference = [1 3 4 17 18]; % whole cerebellum
 idx_frontsubroi = [36 44 46 50 51 52 59 60 64 70 78 80 84 85 86 93 94 98];
@@ -44,8 +46,7 @@ idx_cingsubroi_vol = [3 10 23 26];
 idx_latparietsubroi_vol = [8 25 29 31];
 idx_lattempsubroi_vol = [15 30];
 
-% =========================================================================
-
+%------------------------------------------------------------------------------------------
 % 000 . 
 % Codified version of:
 % 'Import Data --> select csv file --> Table --> Import Selection'
@@ -60,7 +61,7 @@ orig_aparc_rh = import_aparc_rh_csv(filename_aparc_rh);
 % Collect first columns (subject) of each table, for easy reference:
 Subjects_matrix = [gtmpvclist orig_aseg(:,1) orig_aparc_lh(:,1) orig_aparc_rh(:,1) ];
     
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%------------------------------------------------------------------------------------------
 % Calculate Cortical Summary SUVR and Amyloid Positivity
     
 % 0.
@@ -129,7 +130,7 @@ CorticalSummaryROISUV = (weighted_avg_suv_front + weighted_avg_suv_cing + weight
 CorticalSummaryROISUVR = CorticalSummaryROISUV ./ suv_ref;
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%------------------------------------------------------------------------------------------
 % Organize raw data into bilateral ROI SUVR with cortical summary score
 % Output: 'FINAL' table
 
@@ -158,3 +159,5 @@ T_Rearranged_SUVR = array2table( Rearranged_SUVR, 'VariableNames', append('suvr_
 % 8. Combine all into one (FINAL):
 FINAL = [Subjects_matrix(:,end) array2table(CorticalSummaryROISUVR, 'VariableNames', {'CorticalSummarySUVR'}) T_Rearranged_SUVR];
 FINAL.Properties.VariableNames
+
+%------------------------------------------------------------------------------------------
