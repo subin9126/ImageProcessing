@@ -11,15 +11,16 @@
 % * MUST BE FROM FREESURFER V.6.
 % * MAKE SURE SUBJECTS IN GTMSTATS AND ASEG/APARCSTATS ARE IN SAME ORDER***
 %   - to make sure, input gtmpvclist that is a csv file.
-clear 
-% Adjust settings as needed 
-% (should all be unedited .csv files! .xls files usually result in errors):
-filename_gtmpvclist = 'Z:\Personal_Folder\Subin\KUH\APET\batch_1and2\gtmpvclist_kuh_combined.csv'; 
-filename_gtmstats = 'Z:\Personal_Folder\Subin\KUH\APET\batch_1and2\gtmstats_kuh_apet_norescale_combined.csv'; 
-filename_aseg = 'Z:\Personal_Folder\Subin\KUH\APET\batch_1and2\kuh_apet_asegstats_combined.csv';
-filename_aparc_lh = 'Z:\Personal_Folder\Subin\KUH\APET\batch_1and2\kuh_apet_lh_volume_combined.csv';
-filename_aparc_rh = 'Z:\Personal_Folder\Subin\KUH\APET\batch_1and2\kuh_apet_rh_volume_combined.csv';
 
+
+clear 
+% Fill in path to specified files.
+% (should all be unedited .csv files! .xls files usually result in errors):
+filename_gtmpvclist = <path to .csv file version of gtmpvclist from '5_extract_PVCvalues'> 
+filename_gtmstats = <path to .csv file output of gtmstats from '5_extract_PVCvalues'>  
+filename_aseg = <path to .csv file asegstats2table output of '5_Extract_FS_stats'>
+filename_aparc_lh = <path to .csv file lh aparcstats2table output of '5_Extract_FS_stats'>
+filename_aparc_rh = <path to .csv file rh aparcstats2table output of '5_Extract_FS_stats'>
 
 %-------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -59,27 +60,8 @@ orig_aparc_rh = import_aparc_rh_csv(filename_aparc_rh);
 % Collect first columns (subject) of each table, for easy reference:
 Subjects_matrix = [gtmpvclist orig_aseg(:,1) orig_aparc_lh(:,1) orig_aparc_rh(:,1) ];
     
-%     % CHECK if hospnum of gtmstats and aseg/aparcstats match.
-%     hospnum_gtmpvclist = char(table2cell(gtmpvclist));
-%     hospnum_aseg = char(table2cell(orig_aseg(:,1)));
-%     hospnum_aparc_lh = char(table2cell(orig_aparc_lh(:,1)));
-%     hospnum_aparc_rh = char(table2cell(orig_aparc_rh(:,1)));
-%     
-%     hospnum_gtmpvclist = cellstr(hospnum_gtmpvclist(:,13:20)); % 'gtmpvc_flip_11111111_yymmdd~' = 13:20th characters
-%     hospnum_aseg = cellstr(hospnum_aseg(:,2:9));               %'r11111111_yymmdd~' = 2:9th characters
-%     hospnum_aparc_lh = cellstr(hospnum_aparc_lh(:,2:9));
-%     hospnum_aparc_rh = cellstr(hospnum_aparc_rh(:,2:9));
-%        
-%     Subjects_matrix_hospnumonly = [hospnum_gtmpvclist hospnum_aseg hospnum_aparc_lh hospnum_aparc_rh];
-% 
-%     if min(strcmp(Subjects_matrix_hospnumonly(:,1), Subjects_matrix_hospnumonly(:,2)))==1 ...
-%             && min(strcmp(Subjects_matrix_hospnumonly(:,1), Subjects_matrix_hospnumonly(:,3)))==1 ...
-%             && min(strcmp(Subjects_matrix_hospnumonly(:,2), Subjects_matrix_hospnumonly(:,3)))==1 ...
-%             && min(strcmp(Subjects_matrix_hospnumonly(:,3), Subjects_matrix_hospnumonly(:,4)))==1
-%         a='good';
-%     else
-%         error('Subject hospnum of gtmstats, aseg, lhrhaparc DO NOT MATCH. Check Subjects_matrix_hospnumonly')
-%     end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Calculate Cortical Summary SUVR and Amyloid Positivity
     
 % 0.
 % Rearrange column order:
@@ -147,10 +129,11 @@ CorticalSummaryROISUV = (weighted_avg_suv_front + weighted_avg_suv_cing + weight
 CorticalSummaryROISUVR = CorticalSummaryROISUV ./ suv_ref;
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Organize raw data into bilateral ROI SUVR with cortical summary score
+% Output: 'FINAL' table
 
-
-% Rearrange suv values of ROI in following order:
+% 5. Rearrange suv values of ROI in following order:
 lh_roinames = {'LeftThalamusProper','LeftCaudate','LeftPutamen','LeftPallidum','LeftHippocampus','LeftAmygdala','LeftAccumbensarea','LeftVentralDC','Leftchoroidplexus','ctxlhbankssts','ctxlhcaudalanteriorcingulate','ctxlhcaudalmiddlefrontal','ctxlhcuneus','ctxlhentorhinal','ctxlhfrontalpole','ctxlhfusiform','ctxlhinferiorparietal','ctxlhinferiortemporal','ctxlhinsula','ctxlhisthmuscingulate','ctxlhlateraloccipital','ctxlhlateralorbitofrontal','ctxlhlingual','ctxlhmedialorbitofrontal','ctxlhmiddletemporal','ctxlhparacentral','ctxlhparahippocampal','ctxlhparsopercularis','ctxlhparsorbitalis','ctxlhparstriangularis','ctxlhpericalcarine','ctxlhpostcentral','ctxlhposteriorcingulate','ctxlhprecentral','ctxlhprecuneus','ctxlhrostralanteriorcingulate','ctxlhrostralmiddlefrontal','ctxlhsuperiorfrontal','ctxlhsuperiorparietal','ctxlhsuperiortemporal','ctxlhsupramarginal','ctxlhtemporalpole','ctxlhtransversetemporal'};
 rh_roinames = {'RightThalamusProper','RightCaudate','RightPutamen','RightPallidum','RightHippocampus','RightAmygdala','RightAccumbensarea','RightVentralDC','Rightchoroidplexus','ctxrhbankssts','ctxrhcaudalanteriorcingulate','ctxrhcaudalmiddlefrontal','ctxrhcuneus','ctxrhentorhinal','ctxrhfrontalpole','ctxrhfusiform','ctxrhinferiorparietal','ctxrhinferiortemporal','ctxrhinsula','ctxrhisthmuscingulate','ctxrhlateraloccipital','ctxrhlateralorbitofrontal','ctxrhlingual','ctxrhmedialorbitofrontal','ctxrhmiddletemporal','ctxrhparacentral','ctxrhparahippocampal','ctxrhparsopercularis','ctxrhparsorbitalis','ctxrhparstriangularis','ctxrhpericalcarine','ctxrhpostcentral','ctxrhposteriorcingulate','ctxrhprecentral','ctxrhprecuneus','ctxrhrostralanteriorcingulate','ctxrhrostralmiddlefrontal','ctxrhsuperiorfrontal','ctxrhsuperiorparietal','ctxrhsuperiortemporal','ctxrhsupramarginal','ctxrhtemporalpole','ctxrhtransversetemporal'};
 
@@ -160,18 +143,18 @@ rearranged_suv_lh_asegaparc = table2array(orig_gtmstats(:,rearrange_lh_asegaparc
 rearranged_suv_rh_asegaparc = table2array(orig_gtmstats(:,rearrange_rh_asegaparc_idx));
 
 
-% Sum lh and rh of each roi:
+% 6. Sum lh and rh of each roi:
 bilateral_roinames = {'Cerebellum','ThalamusProper','Caudate','Putamen','Pallidum','Hippocampus','Amygdala','Accumbensarea','VentralDC','choroidplexus','bankssts','caudalanteriorcingulate','caudalmiddlefrontal','cuneus','entorhinal','frontalpole','fusiform','inferiorparietal','inferiortemporal','insula','isthmuscingulate','lateraloccipital','lateralorbitofrontal','lingual','medialorbitofrontal','middletemporal','paracentral','parahippocampal','parsopercularis','parsorbitalis','parstriangularis','pericalcarine','postcentral','posteriorcingulate','precentral','precuneus','rostralanteriorcingulate','rostralmiddlefrontal','superiorfrontal','superiorparietal','superiortemporal','supramarginal','temporalpole','transversetemporal'};
 
 rearranged_suv_bilateral_ref_and_asegaparc = [suv_ref (rearranged_suv_lh_asegaparc + rearranged_suv_rh_asegaparc)];
 T_Rearranged_suv_ref_and_bilateral = array2table( rearranged_suv_bilateral_ref_and_asegaparc, 'VariableNames', append('suv_', bilateral_roinames));
 
 
-% Calculate suvr from the rearranged.
+% 7. Calculate suvr from the rearranged.
 Rearranged_SUVR = rearranged_suv_bilateral_ref_and_asegaparc(:,2:end) ./ suv_ref;
 T_Rearranged_SUVR = array2table( Rearranged_SUVR, 'VariableNames', append('suvr_', bilateral_roinames(2:end)) );
 
 
-% Combine all into one (FINAL):
+% 8. Combine all into one (FINAL):
 FINAL = [Subjects_matrix(:,end) array2table(CorticalSummaryROISUVR, 'VariableNames', {'CorticalSummarySUVR'}) T_Rearranged_SUVR];
 FINAL.Properties.VariableNames
