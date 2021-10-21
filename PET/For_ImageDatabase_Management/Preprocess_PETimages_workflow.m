@@ -1,7 +1,8 @@
-function [] = Preprocess_PETimages_workflow(Folder, pettype,output_1_1_nii_folder,output_1_2_flip_nii_folder)
-
 % Written 19/07/16 by LSB for MRIDay workflow.
 % This script uses SPM function and code from NIfTI_20140122
+% Used by 1_preprocses_pet
+
+function [] = Preprocess_PETimages_workflow(Folder, pettype,output_1_1_nii_folder,output_1_2_flip_nii_folder)
 
 Files = dir(fullfile(Folder, strcat('*',pettype, '.img')));
 
