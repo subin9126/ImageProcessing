@@ -12,6 +12,8 @@ The WMH are obtained in two types according to two different definitions:
 
 ![git_fig_wmh pipeline overview](https://user-images.githubusercontent.com/46069735/138241103-d4391085-c831-46ba-8391-6b2e2617c27c.PNG)
 
+This pipeline uses ROI masks from FreeSurfer (registered to FLAIR space) for masking out false positive segmentations and to obtain a ventricle mask for WMH type definition.
+
 
 ## Directions
 Run files step-by-step in the following order:
