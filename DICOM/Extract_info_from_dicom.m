@@ -1,3 +1,6 @@
+% Version 3.2
+% original name: 'Extract_agesex_info_from_dicom_v3_2.m'
+
 clear
 
 Search_Dir = '/media/mri_dicom_mnt/20200709';

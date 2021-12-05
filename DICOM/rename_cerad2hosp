@@ -8,7 +8,7 @@ cd $SRC_DIR
 
 cerad_name=(BD0743_091126 BD0910_160122 )
 
-hosp_name=( 12146288_091126 12272149_160122 )
+hosp_name=( 12121212_091126 12345678_160122 )
 
 for idx in ${!cerad_name[*]}
 	do
