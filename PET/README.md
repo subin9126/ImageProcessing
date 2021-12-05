@@ -1,3 +1,7 @@
+
+# PET Pipeline Overview
+
+## Directions
 Run files step-by-step in following order:
 * Rename_and_move_PETfiles.m
 * Upload_files_to_server.m
