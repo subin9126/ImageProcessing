@@ -15,10 +15,9 @@ for i = 1:numSubjects
     cd([Search_Dir '/' subject ])%'/T1'])
         
     % Scan for all files and bring the first dcm file
-    % If subjectfolder empty, record subjectname only and skip to next
-    % If subjectfolder not empty, record age and sex info also.
+    % If subjectfolder empty, record subjectname only and skip to next.
+    % If subjectfolder not empty, record the rest of the dicom info.
     dcmfiles = dir('./IM_*'); %dir('./*.dcm');
-%     dcmfiles = dcmfiles(3:end);
     
     if isempty(dcmfiles)==1
         Matrix{i,1} = subject;
@@ -43,7 +42,7 @@ for i = 1:numSubjects
         
         clear d
         
-        %Age(i,1) = str2num(Matrix{i,6}(2:3));
+    
         
        
     end
@@ -52,5 +51,5 @@ end
 
 if exist('unavail_subj','var') == 1
     unavail_subj = unavail_subj(~cellfun('isempty',unavail_subj));
-    % avail_sub = Matrix(~cellfun('isempty',Matrix));
+
 end

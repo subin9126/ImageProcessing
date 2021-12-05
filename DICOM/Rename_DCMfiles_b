@@ -1,0 +1,24 @@
+#!/bin/bash
+# https://stackoverflow.com/questions/2437452/how-to-get-the-list-of-files-in-a-directory-in-a-shell-script
+# Copies dicom files to new_name folder and changes the dicom filenames in there.
+
+Folder="/home/ws1/Downloads"
+out_dir="/media/ws1/DATA/NIPA2018/SNUBH_DATA_Year2/NIPA_ADNI_add69_190813_new"
+for subj in 100_S_0035 153_S_4151 013_S_1276 018_S_0335 
+	do 	
+	
+	mkdir $out_dir/$subj
+	
+	cd $Folder/$subj/*/*/*
+	cp *.dcm $out_dir/$subj
+
+	cd $out_dir/$subj
+	num=1
+	for file in *.dcm
+		do
+		mv "$file" $subj"_"$(printf '%05d' $num)".dcm"		
+		#mv "$file" "${new_subj[$idx]}_$(printf '%05d' $num).${file#*.}"
+		((num++))
+	done
+
+done

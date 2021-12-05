@@ -1,0 +1,20 @@
+#!/bin/bash
+# Changes cerad_mridate name to hospnum_mridate name.
+# Can do reverse if set up that way. 
+
+SRC_DIR=/media/ws1/C6E0A61DE0A61429/NIPA_WMH_FILES/3_BCFLAIR_DATA/Year_1/AD
+
+cd $SRC_DIR
+
+cerad_name=(BD0743_091126 BD0910_160122 )
+
+hosp_name=( 12146288_091126 12272149_160122 )
+
+for idx in ${!cerad_name[*]}
+	do
+	# For 3_BCFLAIR_DATA:
+	mv "m"${cerad_name[$idx]}.hdr "m"${hosp_name[$idx]}.hdr
+	mv "m"${cerad_name[$idx]}.img "m"${hosp_name[$idx]}.img
+done
+
+
