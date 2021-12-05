@@ -10,6 +10,6 @@ Run files step-by-step in following order:
 
 Only edit paths and subject info.
 
-No need to make changes to code below ######## line
+No need to make changes to code below ######## or %%%%%%%% line
 
 Check outputs in between steps.
