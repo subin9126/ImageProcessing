@@ -1,4 +1,7 @@
 
+% For extracting specified ROI stats from fsstats files
+
+%---------Specify accoringly-------------------------------------------
 Folder = 'K:\7_TextureABAD';
 
 filename_aseg = '200902_textureprd_addmci_205ppl_asegstats.csv';
@@ -7,10 +10,11 @@ filename_aparc_rh = '200902_textureprd_addmci_205ppl_rh_volume.csv';
 filename_aparc_thick_lh = '200902_textureprd_addmci_205ppl_lh_thickness.csv';
 filename_aparc_thick_rh = '200902_textureprd_addmci_205ppl_rh_thickness.csv';
 
+% Input column indices of desired ROIs:
 aseg_rearrange = [1 67 13 28];
 aparc_rearrange = [1 10 25 ];
 
-%--------------------------------------------------------------------
+%---------Do not change below------------------------------------------
 filename_aseg = [Folder '\' filename_aseg];
 filename_aparc_lh = [Folder '\' filename_aparc_lh];
 filename_aparc_rh = [Folder '\' filename_aparc_rh];
