@@ -1,9 +1,10 @@
 # FreeSurfer Pipeline Overview
 This pipeline processes T1-weighted MRI to obtain anatomical labels and regional metrics (volume, cortical thickness) from each subject.
 
-![git_fig_fs pipeline overview_0](https://user-images.githubusercontent.com/46069735/144740241-073badb3-931a-4eec-b236-705bf3ac236f.PNG)
+![git_fig_fs pipeline overview_0](https://user-images.githubusercontent.com/46069735/144862145-32c93dbb-dcd2-405b-baf6-cb67dc1b01c6.PNG)
 
-![git_fig_fs pipeline overview](https://user-images.githubusercontent.com/46069735/144739957-d4d5f800-0528-42e4-a837-ad4e8858e3e7.PNG)
+![git_fig_fs pipeline overview](https://user-images.githubusercontent.com/46069735/144862159-3134eed2-f6cc-4757-8071-4c367a20ef60.PNG)
+
 
 ## Directions
 Run files step-by-step in the following order:
