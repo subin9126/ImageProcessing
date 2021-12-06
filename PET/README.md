@@ -1,5 +1,10 @@
 
 # PET Pipeline Overview
+This pipeline processes positron emission tomography (PET) scans with FreeSurfer output files to obtain partial volume-corrected standardized uptake values (pvcSUV) of each anatomical region. 
+
+![git_fig_pet pipeline overview_0](https://user-images.githubusercontent.com/46069735/144858284-26ca0ded-979e-4125-bdc8-c44b29ff0dff.PNG)
+
+![git_fig_pet pipeline overview](https://user-images.githubusercontent.com/46069735/144858297-e0d9b69a-71cc-45f1-be51-998ec86119b4.PNG)
 
 ## Directions
 Run files step-by-step in following order:
