@@ -11,7 +11,7 @@ SUBJECT_FOLDERS=( )
 for idx in ${!SUBJECT_FOLDERS[*]} 
 
 	do
-subj=${SUBJECT_FOLDERS[$idx]}
+	subj=${SUBJECT_FOLDERS[$idx]}
 
 	cd $SERVER_DIR/*/$subj
 	
